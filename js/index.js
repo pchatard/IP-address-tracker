@@ -1,6 +1,3 @@
-const mapboxAPI = process.env.MAPBOX;
-const ipifyToken = process.env.IPIFY;
-
 // Map Creation
 var mymap = L.map("map").setView([51.505, -0.09], 13);
 L.tileLayer(
