@@ -1,34 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | IP Address Tracker</title>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./images/favicon-32x32.png"
+		/>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+		<title>Frontend Mentor | IP Address Tracker</title>
 
-  IP Address Tracker
+		<link rel="stylesheet" href="css/styles.css" />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+			crossorigin=""
+		/>
+		<script
+			src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+			integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+			crossorigin=""
+		></script>
+		<script src="js/index.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<h1>IP Address Tracker</h1>
+			<form onSubmit="event.preventDefault()">
+				<input
+					type="search"
+					name="ip"
+					id="ip-search"
+					placeholder="Search for any IP address or domain"
+				/>
+				<button type="submit" id="submit">
+					<img src="images/icon-arrow.svg" alt="Search arrow" />
+				</button>
+			</form>
+		</header>
+		<main>
+			<section id="results">
+				<div class="result-box">
+					<h2>IP Address</h2>
+					<p class="result" id="ip-result">192.212.174.101</p>
+				</div>
+				<div class="result-box">
+					<h2>Location</h2>
+					<p class="result" id="location">Brooklyn, NY 10001</p>
+				</div>
+				<div class="result-box">
+					<h2>Timezone</h2>
+					<p class="result">
+						UTC
+						<span id="timezone">-05:00</span>
+					</p>
+				</div>
+				<div class="result-box">
+					<h2>ISP</h2>
+					<p class="result" id="isp">SpaceX Starlink</p>
+				</div>
+			</section>
 
-  Search for any IP address or domain
+			<div id="map"></div>
+		</main>
 
-  IP Address
-  Location
-  Timezone
-    UTC <!-- add offset value dynamically using the API -->
-  ISP
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+		<footer class="attribution">
+			Challenge by
+			<a
+				href="https://www.frontendmentor.io?ref=challenge"
+				target="_blank"
+				>Frontend Mentor</a
+			>. Coded by
+			<a href="https://www.github.com/pchatard" target="_blank">Pierre</a
+			>.
+		</footer>
+	</body>
 </html>
