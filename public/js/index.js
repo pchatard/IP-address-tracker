@@ -1,5 +1,5 @@
 let mapOptions, mymap, marker;
-const baseUrl = 'http://localhost:5500';
+const baseUrl = 'https://ip-address-tracker-omega.vercel.app';
 
 (async function fetchMapOptions() {
 	const response = await fetch(`${baseUrl}/map`);
