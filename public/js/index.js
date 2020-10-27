@@ -1,5 +1,5 @@
 let mapOptions, mymap, marker;
-const baseUrl = 'https://ip-address-tracker-omega.vercel.app';
+const baseUrl = 'https://iptrackerbackend.herokuapp.com';
 
 (async function fetchMapOptions() {
 	const response = await fetch(`${baseUrl}/map`);
