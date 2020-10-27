@@ -13,7 +13,9 @@ const baseUrl = 'https://iptrackerbackend.herokuapp.com';
 	).addTo(mymap);
 
 	var myIcon = L.icon({
-		iconUrl: "../images/icon-location.svg",
+        iconUrl: "../images/icon-location.svg",
+        iconSize: [46, 56],
+        iconAnchor: [46, 56]
 	});
 	marker = L.marker([51.5, -0.09], { icon: myIcon }).addTo(mymap);
 })();
