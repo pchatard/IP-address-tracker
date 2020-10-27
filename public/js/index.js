@@ -1,22 +1,22 @@
-// Map Creation
-var mymap = L.map("map").setView([51.505, -0.09], 13);
-L.tileLayer(
-	"https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-	{
-		attribution:
-			'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		maxZoom: 18,
-		id: "mapbox/streets-v11",
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: mapboxAPI,
-	}
-).addTo(mymap);
+let mapOptions, mymap, marker;
+const baseUrl = 'http://localhost:5500';
 
-var myIcon = L.icon({
-	iconUrl: "../images/icon-location.svg",
-});
-var marker = L.marker([51.5, -0.09], { icon: myIcon }).addTo(mymap);
+(async function fetchMapOptions() {
+	const response = await fetch(`${baseUrl}/map`);
+	const data = await response.json();
+	mapOptions = data;
+	// Map Creation
+	mymap = L.map("map").setView([51.505, -0.09], 13);
+	L.tileLayer(
+		"https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+		{ ...mapOptions }
+	).addTo(mymap);
+
+	var myIcon = L.icon({
+		iconUrl: "../images/icon-location.svg",
+	});
+	marker = L.marker([51.5, -0.09], { icon: myIcon }).addTo(mymap);
+})();
 
 // Target the input and submit button
 const input = document.getElementById("ip-search");
@@ -32,7 +32,6 @@ submitBtn.addEventListener("click", getIpInformation);
 
 async function getIpInformation() {
 	const IP = getIPFromInput();
-	console.log(IP);
 	const data = await fetchDataFromAPI(IP);
 	fillResultBoxes(data);
 	moveMap(data.location);
@@ -43,11 +42,10 @@ function getIPFromInput() {
 }
 
 async function fetchDataFromAPI(ipAddress) {
-	const response = await fetch(
-		`https://geo.ipify.org/api/v1?apiKey=${ipifyToken}&ipAddress=${ipAddress}`
-	);
-	const jsonResponse = await response.json();
-	return jsonResponse;
+	const response = await fetch(`${baseUrl}/ip/${ipAddress}`);
+	const data = await response.json();
+	console.log(data);
+	return data;
 }
 
 function fillResultBoxes(data) {
